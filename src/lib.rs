@@ -116,7 +116,7 @@ impl Unit {
             A: self.A - rhs.A,
             K: self.K - rhs.K,
             mol: self.mol - rhs.mol,
-            cd: self.cd + rhs.cd,
+            cd: self.cd - rhs.cd,
         }
     }
 }
