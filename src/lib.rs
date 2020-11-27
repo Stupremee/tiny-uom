@@ -11,6 +11,11 @@
 #![allow(incomplete_features)]
 #![feature(const_generics, const_evaluatable_checked)]
 
+use std::ops;
+
+pub mod units;
+pub mod values;
+
 /// The `Unit` struct can represent every possible unit
 /// that is defined in the [`SI`] system.
 ///
@@ -38,18 +43,18 @@
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 #[allow(non_snake_case)]
 pub struct Unit {
-    m: i8,
-    kg: i8,
-    s: i8,
-    A: i8,
-    K: i8,
-    mol: i8,
-    cd: i8,
+    pub(crate) m: i8,
+    pub(crate) kg: i8,
+    pub(crate) s: i8,
+    pub(crate) A: i8,
+    pub(crate) K: i8,
+    pub(crate) mol: i8,
+    pub(crate) cd: i8,
 }
 
 impl Unit {
-    /// Invert all exponents of this unit
-    const fn neg(self) -> Self {
+    /// Invert this unit by negating all exponents.
+    pub const fn inv(self) -> Self {
         Self {
             m: -self.m,
             kg: -self.kg,
@@ -62,7 +67,7 @@ impl Unit {
     }
 
     /// Multiply two units and return the resulting unit.
-    const fn mul(self, rhs: Self) -> Self {
+    pub const fn mul(self, rhs: Self) -> Self {
         Self {
             m: self.m + rhs.m,
             kg: self.kg + rhs.kg,
@@ -75,7 +80,7 @@ impl Unit {
     }
 
     /// Divide two units and return the resulting unit.
-    const fn div(self, rhs: Self) -> Self {
+    pub const fn div(self, rhs: Self) -> Self {
         Self {
             m: self.m + rhs.m,
             kg: self.kg + rhs.kg,
@@ -85,6 +90,24 @@ impl Unit {
             mol: self.mol + rhs.mol,
             cd: self.cd + rhs.cd,
         }
+    }
+}
+
+impl ops::Mul<Unit> for Unit {
+    type Output = Self;
+
+    /// Multiplies two units by adding their exponents.
+    fn mul(self, rhs: Unit) -> Self::Output {
+        self.mul(rhs)
+    }
+}
+
+impl ops::Div<Unit> for Unit {
+    type Output = Self;
+
+    /// Divides two units by substracting their exponents.
+    fn div(self, rhs: Unit) -> Self::Output {
+        self.div(rhs)
     }
 }
 
@@ -102,6 +125,13 @@ pub struct Quantity<const U: Unit> {
 /// Implement all methods and traits for a quantity type.
 macro_rules! quantity_impl {
     ($num:ty, $t:ident) => {
+        impl<const U: Unit> Quantity<U> {
+            /// Create a new `Quantity` with the given value.
+            pub fn new(value: f64) -> Self {
+                Self { value }
+            }
+        }
+
         // ============================
         // Add implementations
         // ============================

@@ -7,7 +7,8 @@
 This crate is mostly based on [this] proof-of-concept using const generics.
 `tiny-uom` is a port of `uom` to use const generics and to be a faster and smaller version.
 It provides type-safe and zero-cost [dimensional-analysis].
-`tiny-uom` provides all units that are specified in the [International System of Units][SI].
+`tiny-uom` provides all units that are specified in the [International System of Units][SI]
+and all quantities that are specified in the [International System of Quantities][ISQ].
 
 ## Usage
 
@@ -35,3 +36,4 @@ This project is licensed under the [MIT][license] license
 [this]: https://docs.rs/const_unit_poc
 [dimensional-analysis]: https://en.wikipedia.org/wiki/Dimensional_analysis
 [SI]: https://jcgm.bipm.org/vim/en/1.16.html
+[ISQ]: https://jcgm.bipm.org/vim/en/1.6.html
