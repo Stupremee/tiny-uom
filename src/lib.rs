@@ -11,14 +11,13 @@
 //! #![feature(const_generics, const_evaluatable_checked)]
 //! #![allow(incomplete_features)]
 //! use tiny_uom::values::{kg, m, s};
-//! use tiny_uom::units;
 //!
 //! # fn main() {
 //! let distance = 10.0 * m;
 //! let time = 2.0 * s;
 //!
 //! let velocity = distance / time;
-//! assert_eq!(velocity.value, 5.0);
+//! assert_eq!(velocity, 5.0 * (m / s));
 //! # }
 //! ```
 //!
@@ -41,8 +40,8 @@
 
 use std::{fmt, ops};
 
-pub mod units;
-pub mod values;
+mod si;
+pub use si::{units, values};
 
 /// The `Unit` struct can represent every possible unit
 /// that is defined in the [`SI`] system.
