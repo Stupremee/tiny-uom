@@ -165,6 +165,17 @@ macro_rules! quantity_impl {
             }
         }
 
+        impl<const U: Unit> Mul<$t<U>> for $num {
+            type Output = $t<U>;
+
+            /// Multiply the value of this unit with a number.
+            fn mul(self, rhs: $t<U>) -> Self::Output {
+                $t {
+                    value: self * rhs.value,
+                }
+            }
+        }
+
         impl<const L: Unit, const R: Unit> Mul<$t<R>> for $t<L>
         where
             $t<{ L.mul(R) }>: ,
