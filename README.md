@@ -1,6 +1,6 @@
 # `tiny-uom`
 
-smol and fast version of [`uom`]
+**smol and fast version of [`uom`]**
 
 [Documentation][docs-rs] | [Crate][crates-io] | [Examples][examples]
 
