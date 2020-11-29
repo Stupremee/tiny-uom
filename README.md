@@ -20,9 +20,18 @@ Add this your `Cargo.toml`:
 tiny-uom = "0.1.0"
 ```
 
-## Design
+```rust
+#![feature(const_generics, const_evaluatable_checked)]
+#![allow(incomplete_features)]
 
-coming soon...
+use tiny_uom::values::{kg, m, s};
+
+let distance = 10.0 * m;
+let time = 2.0 * s;
+
+let velocity = distance / time;
+assert_eq!(velocity, 5.0 * (m / s));
+```
 
 ### License
 
