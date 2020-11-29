@@ -1,4 +1,7 @@
-# `tiny-uom`
+`tiny-uom`
+==========
+[![Crates.io](https://img.shields.io/crates/v/uom.svg)](https://crates.io/crates/tiny-uom)
+[![Documentation](https://img.shields.io/badge/documentation-docs.rs-blue.svg)](https://docs.rs/tiny-uom)
 
 **smol and fast version of [`uom`]**
 
